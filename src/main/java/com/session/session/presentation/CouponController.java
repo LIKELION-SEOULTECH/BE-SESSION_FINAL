@@ -21,12 +21,14 @@ public class CouponController {
         return result ? ResponseEntity.ok("쿠폰 발급 성공 (일반)") : ResponseEntity.badRequest().body("쿠폰 소진");
     }
 
+    // 락으로 걸 API
     @PostMapping("/lock-coupon")
     public ResponseEntity<String> issueCouponWithLock(@RequestParam Long userId) {
         boolean result = couponService.issueWithLock(userId);
         return result ? ResponseEntity.ok("쿠폰 발급 성공 (락)") : ResponseEntity.badRequest().body("쿠폰 소진");
     }
 
+    // RabbitMQ 를 통해 만들 API
     @PostMapping("/queue-coupon")
     public ResponseEntity<String> issueCouponWithQueue(@RequestParam Long userId) {
         couponService.enqueueCouponRequest(userId);

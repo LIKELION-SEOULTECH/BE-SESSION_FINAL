@@ -34,6 +34,7 @@ public class CouponApiQueueTest {
 
     @Test
     void 동시에_100명이_큐_요청해도_10명만_성공한다() throws Exception {
+
         int threadCount = 100;
         ExecutorService executorService = Executors.newFixedThreadPool(32);
         CountDownLatch latch = new CountDownLatch(threadCount);
